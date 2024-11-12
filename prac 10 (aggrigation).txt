@@ -8,8 +8,15 @@ db.website.insertMany([{'Roll':'1','Name':'Abhishek','Amount':1000,'URL':'www.ya
 {'Roll':'4','Name':'Shrinath','Amount':4000,'URL':'www.gmail.com'},
 {'Roll':'5','Name':'Shrinath','Amount':1000,'URL':'www.pvg.com'}]);
 db.website.aggregate({$group:{_id:"$Name","Total":{$sum:"$Amount"}}});
-db.website.aggregate({$group:{_id:"$Name","Total":{$avg:"$Amount"}}}); db.website.aggregate({$group:{_id:"$Name","Total":{$min:"$Amount"}}}); db.website.aggregate({$group:{_id:"$Name","Total":{$max:"$Amount"}}}); db.website.aggregate({$group:{_id:"$Name","Total":{$first:"$Amount"}}}); db.website.aggregate({$group:{_id:"$Name","Total":{$last:"$Amount"}}}); db.website.aggregate({$group:{_id:"$Name","Total":{$push:"$Amount"}}});
-db.website.aggregate({$group:{_id:"$Name","Total":{$sum:1}}}); db.website.aggregate({$group:{_id:"$Name","Total":{$addToSet:"$Amount"}}}); db.createCollection('website1');
+db.website.aggregate({$group:{_id:"$Name","Total":{$avg:"$Amount"}}}); 
+db.website.aggregate({$group:{_id:"$Name","Total":{$min:"$Amount"}}}); 
+db.website.aggregate({$group:{_id:"$Name","Total":{$max:"$Amount"}}}); 
+db.website.aggregate({$group:{_id:"$Name","Total":{$first:"$Amount"}}}); 
+db.website.aggregate({$group:{_id:"$Name","Total":{$last:"$Amount"}}});
+db.website.aggregate({$group:{_id:"$Name","Total":{$push:"$Amount"}}});
+db.website.aggregate({$group:{_id:"$Name","Total":{$sum:1}}}); 
+db.website.aggregate({$group:{_id:"$Name","Total":{$addToSet:"$Amount"}}});
+db.createCollection('website1');
 db.website1.insertOne({'r':1,'name':'xyz'});
 db.website1.find().pretty();
 db.website1.createIndex({'name':1}) 

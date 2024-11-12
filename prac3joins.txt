@@ -1,0 +1,37 @@
+CREATE TABLE Product_details(product_id int(5),product_name varchar(10),quantity int(5),price int(5));
+INSERT INTO Product_details VALUES(501,"Pendrive",100,900);
+INSERT INTO Product_details VALUES(502,"Harddisk",200,3500);
+INSERT INTO Product_details VALUES(503,"Headphone",1000,600);
+INSERT INTO Product_details VALUES(504,"DVD",20,1500);
+INSERT INTO Product_details VALUES(505,"Speaker",600,1200);
+INSERT INTO Product_details VALUES(506,"headphone",1000,400);
+SELECT * FROM Product_details;
+CREATE TABLE Sales_details(sale_no int(5),product_id int(5),quantity int(5),price int(5),customer_name varchar(10));
+INSERT INTO Sales_details VALUES(201,501,50,900,"Pratiksha");
+INSERT INTO Sales_details VALUES(202,504,10,1500,"Vidya");
+INSERT INTO Sales_details VALUES(203,503,120,600,"Akanksha");
+INSERT INTO Sales_details VALUES(204,505,420,1200,"Jyoti");
+ INSERT INTO Sales_details VALUES(205,502,40,3500,"Pranali");
+SELECT * FROM Sales_details;
+
+		***** JOINS ******
+
+		****** INNER JOIN ****** 
+
+SELECT Product_details.product_id,product_name,customer_name,Sales_details.quantity,Product_details.price FROM Product_details INNER JOIN Sales_details ON Product_details.product_id=Sales_details.product_id;
+
+		****** OUTER JOINS ******
+
+		****** LEFT OUTER JOIN ******
+
+SELECT Product_details.product_id,Product_details.product_name,Sales_details.customer_name FROM Product_details LEFT OUTER JOIN Sales_details ON Sales_details.product_id=Product_details.product_id;
+
+		****** RIGHT OUTER JOIN ****** 
+
+SELECT Product_details.product_id,Product_details.product_name,Sales_details.customer_name FROM Product_details RIGHT OUTER JOIN Sales_details ON Sales_details.product_id=Product_details.product_id;
+
+
+		****** SUB-QUERIES ******
+SELECT Product_details.product_name FROM Product_details WHERE Product_details.product_id IN (SELECT Sales_details.Product_id FROM Sales_details);
+
+

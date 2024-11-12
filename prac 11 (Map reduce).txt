@@ -1,0 +1,17 @@
+show dbs
+use mapfunction
+db.map.insertMany([{cust_id:"A123",Amount:500,status:'A'},
+{cust_id:"A123",Amount:258,status:'A'},
+{cust_id:"A121",Amount:200,status:'A'},
+{cust_id:"B234",Amount:200,status:'A'},
+{cust_id:"B234",Amount:234,status:'B'},
+{cust_id:"A121",Amount:400,status:'D'},
+{cust_id:"A234",mount:400,status:'A'},
+{cust_id:"A234",Amount:400,status:'A'},
+{cust_id:"A234",Amount:400,status:'D'},
+{cust_id:"A234",Amount:400,status:'B'}]);
+ db.map.find().pretty()
+var mapFunction1=function() {emit(this.cust_id,this.amount);};
+ var reduceFunction1=function(keyCustId,valuesamount){return ArrArray.sum(valuesamount);};
+ db.map.mapReduce(mapFunction1,reduceFunction1,{out:"map_reduce_example"})
+ db.map_reduce_example.find()

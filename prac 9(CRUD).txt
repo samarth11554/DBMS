@@ -1,0 +1,31 @@
+show dbs
+ use student
+db
+show dbs
+db.createCollection("Student");
+show collections;
+db.createCollection("Emp2");
+show collections;
+db.Emp2.insertMany([{empno:1,ename:"Pratham",edesignation:"Manager",empsal:60000},
+{empno:2,ename:"Vidya",edesignation:"CEO",empsal:80000},
+{empno:3,ename:"Jayesh",edesignation:"Secretary",empsal:50000},
+{empno:4,ename:"Shital",edesignation:"Owner",empsal:55000},
+{empno:5,ename:"Tejas",edesignation:"Worker",empsal:85000}]);
+db.Emp2.find()
+db.Emp2.find().pretty()
+db.Emp2.update({'ename':'Tejas'},{'$set':{'ename':'Rahul'}});
+db.Emp2.find().pretty()
+  db.Emp2.remove({'empno':1})
+db.Emp2.find().pretty()
+db.Student.drop()
+show collections;
+db.createCollection("Student1");
+db.createCollection("Student2");
+db.student2.insertMany([{Rollno:1,Name:'Shilpa',subject:'DBMS',Marks:98},
+{Rollno:2,Name:'Arti',subject:'OSD',Marks:88},
+{Rollno:3,Name:'Vaibhav',subject:'TOC',Marks:75},
+{Rollno:4,Name:'Tejas',subject:'TOC',Marks:70}]);
+db.student2.find().pretty()
+db.student2.find({$and:[{Marks:{$ne:98}},{Marks:{$exists:true}}]})
+db.student2.find({Marks:{$not:{$gt:80}}})
+db.student2.find({$or:[{Name:{"Name":"Tejas"}},{"Name":"Vaibhav"}]})

@@ -1,0 +1,36 @@
+create database dbms;
+use dbms
+create table o_rollcall(roll_no int, name varchar(20), address varchar(20));
+insert into o_rollcall
+values('1','Abhishek','Pimpri'),
+('2','Rashmika','Chakan'),
+('3','Sakshi','Ravet'),
+('4','Mayur','Alandi'),
+('5','Amit','Elpro'),
+('6','Kajal','Mumbai');
+select * from o_rollcall;
+create table n_rollcall(roll_no int, name varchar(20), address varchar(20));
+desc n_rollcall;
+delimiter //
+CREATE PROCEDURE newcurr(IN roll_no0 INT)
+begin
+DECLARE roll_no1 INT;
+DECLARE exit_loop BOOLEAN DEFAULT FALSE;
+DECLARE c1 CURSOR FOR SELECT roll_no FROM o_rollcall WHERE roll_no > roll_no0;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET exit_loop = TRUE;
+OPEN c1;
+emp_loop: LOOP
+ FETCH c1 INTO roll_no1;
+IF exit_loop THEN
+CLOSE c1;
+LEAVE emp_loop;
+END IF;
+IF NOT EXISTS (SELECT * FROM n_rollcall WHERE roll_no = roll_no1) THEN
+INSERT INTO n_rollcall (roll_no, name, address)
+SELECT roll_no, name, address FROM o_rollcall WHERE roll_no = roll_no1;
+ END IF;
+END LOOP emp_loop;
+END //
+CALL newcurr(0);
+select *from n_rollcall;
+

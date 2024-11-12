@@ -1,0 +1,22 @@
+show databases;
+create database practical;
+use practical 
+create table student(roll_no int, name varchar(22), address varchar(50), class varchar(10), dob date);
+insert into student(roll_no, name, address, class, dob)values
+(1, 'sham', 'manchar', 'TE', '2003-12-19'),
+(2, 'ash', 'belhe', 'TE', '2004-07-11'),
+(3, 'ram', 'khed', 'SE', '2003-02-5');
+select * from student;
+select roll_no from student;
+alter table student add clg_name varchar(20);
+select * from student;
+delete from student where roll_no = 3;
+select * from student;
+insert into student values(3, 'ram', 'khed', 'SE', '2001-07-10','sgoi');
+select * from student;
+update student set clg_name = "COEP";
+select * from student;
+create view stu as select roll_no, name, address, class from student;
+select * from stu;
+drop view stu;
+desc student;

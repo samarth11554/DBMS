@@ -1,0 +1,22 @@
+show databases; 
+use practical;
+create table library(bno int, bname varchar(20), author varchar(20),allowed_days int);
+create table library_audit(bno int, old_all_days int, new_all_days int);
+insert into library(bno, bname, author,allowed_days)values
+(1, 'Book One', 'Author A', 10),
+ (2, 'Book Two', 'Author B',20),
+ (3, 'Book Three', 'Author C',15);
+select * from library;
+delimiter //
+create trigger t1
+before update on library
+for each row
+begin
+insert into library_audit values(new.bno,old.allowed_days,new.allowed_days);
+end //
+update library set allowed_days =15 where bno=1;//
+update library set allowed_days =25 where bno=2; //
+update library set allowed_days =17 where bno=3;//
+select * from library;//
+select * from library_audit;//
+
